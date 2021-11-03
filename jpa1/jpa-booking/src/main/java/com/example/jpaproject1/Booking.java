@@ -421,7 +421,7 @@ public void updateBooks(){
       do {
          System.out.print("Enter the email of the group: ");
          String email = getString();
-         List<Authoring_Entities> aEmail = this.em.createNamedQuery("displayAllAuthoringEntities", Authoring_Entities.class).setParameter(1, email).getResultList();
+         List<Authoring_Entities> aEmail = this.em.createNamedQuery("allAuth", Authoring_Entities.class).setParameter(1, email).getResultList();
 
          if (aEmail.size() == 0){
             List<Writing_Groups> wg = new ArrayList<Writing_Groups>();
@@ -494,7 +494,7 @@ public void updateBooks(){
    String teamName = input.nextLine();
       System.out.print("Enter the email of the Ad Hoc Team: ");
    String teamEmail = input.nextLine();
-   List<Authoring_Entities> authEmail = this.em.createNamedQuery("displayAllAuthoringEntities", Authoring_Entities.class).setParameter(1, teamEmail).getResultList();
+   List<Authoring_Entities> authEmail = this.em.createNamedQuery("allAuth", Authoring_Entities.class).setParameter(1, teamEmail).getResultList();
       if(authEmail.size() != 0) {
       System.out.println("Email already exists");
    }
@@ -615,13 +615,14 @@ public void updateBooks(){
       boolean exitCondition = false;
 
       do {
-         List<Authoring_Entities> aEmail = this.em.createNamedQuery("displayAllAuthoringEntities", Authoring_Entities.class).setParameter(1,email).getResultList();
+         List<Authoring_Entities> aEmail = this.em.createNamedQuery("allAuth", Authoring_Entities.class).setParameter(1,email).getResultList();
          if (aEmail.size() == 0){
             List<Individual_Authors> ia = new ArrayList<>();
             ia.add(new Individual_Authors(email, name, null));
             this.createEntity(ia);
             exitCondition = true;
          }
+
       }while(exitCondition == false);
    }
 
