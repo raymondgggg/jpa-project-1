@@ -107,7 +107,7 @@ public class Booking {
             repeatMenu = false;
          }
          if (userChoice == 5){
-            //TODO: updateBook()
+            updateBooks();
             booksMenu();
             repeatMenu = false;
 
@@ -165,19 +165,60 @@ public void updateBooks(){
    System.out.println("what book do you want to update");
    List <Books> books = this.em.createNamedQuery("booksList", Books.class).getResultList();
    for(int i=0; i<books.size();i++){
-      System.out.println(i+" "+books.get(i));
+      System.out.println(i+" "+books.get(i).getTitle());
    }
    Books updateBook=books.get(getIntRange(0, books.size()));
-   System.out.println("Who is the authoring entity");
-   List <Authoring_Entities> auth = this.em.createNamedQuery("displayAllAuthoringEntities", Authoring_Entities.class).getResultList();
+   System.out.println("Who is the new authoring entity");
+   List <Authoring_Entities> auth = this.em.createNamedQuery("allAuth", Authoring_Entities.class).getResultList();
    for (int i=0;i< auth.size();i++){
       System.out.println(i+" "+auth.get(i).getName());
    }
    int authChoice=getIntRange(0,auth.size());
    Authoring_Entities newAuth = auth.get(authChoice);
+   try {
+      updateBook.setAuthoring_entity_name(newAuth);
+   }
+   catch (Exception e){
+      System.out.println("book name already exists in Authoring Entity");
+   }
 
 
 }
+
+   /**
+    * adds a publisher
+    */
+   public void addPublisher(){
+         System.out.print("Enter name of Publisher: ");
+         Scanner inp=new Scanner(System.in);
+         String pubName = inp.nextLine();
+         List<Publishers> pubNames = this.em.createNamedQuery("findPublisher", Publishers.class).setParameter(1, pubName).getResultList();
+         if(pubNames.size() != 0) {
+            System.out.println("name exists");
+            }
+         else{
+            System.out.print("Enter the email of the Publisher: ");
+            String pubEmail = inp.nextLine();
+            List<Publishers> pubEmails = this.em.createNamedQuery("pubEmail", Publishers.class).setParameter(1, pubEmail).getResultList();
+            if(pubEmails.size() != 0) {
+               System.out.println("email exists");
+            }
+            else{
+
+               System.out.print("Enter the phone number of the Publisher: ");
+               String pubPhone = inp.nextLine();
+               List<Publishers> pubPhones = this.em.createNamedQuery("pubEmail", Publishers.class).setParameter(1, pubEmail).getResultList();
+               if(pubEmails.size() != 0) {
+                  System.out.println("email exists");
+               }
+               else{
+                  List<Publishers> publishers = new ArrayList<>();
+                  publishers.add(new Publishers(pubName, pubEmail, pubPhone));
+                  this.createEntity(publishers);
+               }
+            }
+            }
+   }
    /**
     * Method to list the information about a specific book based on user's input of Title
     */
@@ -250,7 +291,7 @@ public void updateBooks(){
             repeatMenu = false;
          }
          else if (userChoice == 2){
-            //TODO: addPublisher()
+            addPublisher();
             repeatMenu = false;
 
          }
@@ -506,6 +547,7 @@ public void updateBooks(){
       return input;
    } //End of the getIntRange method
 
+
    /**
     * Takes in a string from the user.
     * @return the inputted String.
@@ -580,21 +622,10 @@ public void updateBooks(){
       booking.createEntity(entities);
       booking.createEntity(publishers);
       booking.createEntity(books);
-
-
-
-
-
-      booking.deleteBook();
-
-      booking.addWritingGroup();
-
-      booking.addWritingGroup();
-
-
-      booking.listInfoPublisher();
-
+      booking.addPublisher();
       tx.commit();
+
+
 
 
 
