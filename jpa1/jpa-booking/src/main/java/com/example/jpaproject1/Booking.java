@@ -129,7 +129,7 @@ public class Booking {
     * Method to delete book fropm database
     */
    public void deleteBook(){
-<<<<<<< Updated upstream
+
       System.out.println("what book do you want to delete");
       List <Books> books = this.em.createNamedQuery("booksList", Books.class).getResultList();
       for(int i=0; i<books.size();i++){
@@ -139,11 +139,10 @@ public class Booking {
       this.em.remove(deleteBook);
       System.out.println("Book is removed");
 
-=======
       List <Books> books = new ArrayList<>();
 //      books = this.em.createNamedQuery("allBooks", Books.class).getResultList();
       int book=getIntRange(0, books.size());
->>>>>>> Stashed changes
+
    }
 
 
@@ -564,13 +563,15 @@ public class Booking {
       booking.createEntity(publishers);
       booking.createEntity(books);
 
-<<<<<<< Updated upstream
+
 
 
       booking.deleteBook();
-=======
+
       booking.addWritingGroup();
->>>>>>> Stashed changes
+
+      booking.addWritingGroup();
+
       tx.commit();
 
 

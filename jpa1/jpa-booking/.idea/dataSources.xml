@@ -2,7 +2,11 @@
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     <data-source source="LOCAL" name="booking" uuid="490f4f97-8b16-4343-b22c-6d0636fa83e6">
+=======
+    <data-source source="LOCAL" name="booking" uuid="3b77e14b-abd3-4d7b-b192-38940b1320c9">
+>>>>>>> Stashed changes
 =======
     <data-source source="LOCAL" name="booking" uuid="3b77e14b-abd3-4d7b-b192-38940b1320c9">
 >>>>>>> Stashed changes
