@@ -35,10 +35,9 @@ import java.util.Objects;
         resultClass = Books.class
 )
 @NamedNativeQuery(
-        name="books",
+        name="booksList",
         query = "SELECT * " +
-                "FROM   BOOKS " +
-                "WHERE  TITLE = ? ",
+                "FROM   BOOKS " ,
         resultClass = Books.class
 )
 @NamedNativeQuery(

@@ -125,8 +125,8 @@ public class Booking {
    }
 
    public void deleteBook(){
-      List <Books> books = new ArrayList<>();
-      books = this.em.createNamedQuery("books", Books.class).getResultList();
+      System.out.println("what book do you want to delete");
+      List <Books> books = this.em.createNamedQuery("booksList", Books.class).getResultList();
       for(int i=0; i<books.size();i++){
          System.out.println(i+" "+books.get(i));
       }
@@ -510,7 +510,7 @@ public class Booking {
       booking.createEntity(books);
 
 
-      
+
       booking.deleteBook();
       tx.commit();
 
