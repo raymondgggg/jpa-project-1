@@ -668,28 +668,29 @@ public void updateBooks(){
       tx.begin();
 
       List <Authoring_Entities> entities = new ArrayList<>();
-      List <Publishers> publishers = new ArrayList<>();
       List <Books> books = new ArrayList<>();
+      List <Publishers> publishers = new ArrayList<>();
 
 
-      entities.add(new Authoring_Entities("company1@gmail.com", "James Gunn"));
-      entities.add(new Authoring_Entities("company2@gmail.com","Charles Park"));
-      entities.add(new Authoring_Entities("company3@gmail.com", "Nick James"));
-      entities.add(new Authoring_Entities("company4@gmail.com",  "Harley Madison"));
-      entities.add(new Authoring_Entities("company5@gmail.com", "Jessica Quinn"));
+      publishers.add(new Publishers("Scholastic", "Scholastic@gmail.com", "8475647465" ));
+      publishers.add(new Publishers("Simon & Schuster", "SimonSchuster@gmail.com", "1246479584"));
+      publishers.add(new Publishers("Wiley Press", "WileyPress@gmail.com", "8475873674"));
+      publishers.add(new Publishers("Penguin Books", "PenguinBooks@gmail.com", "6745653389"));
+      publishers.add(new Publishers("Chronicle Books", "ChronicleBooks@gmail.com", "9087653647"));
 
-      publishers.add(new Publishers("Bloomsbury Publishing", "bloomsburypublishing@gmail.com", "1111111111" ));
-      publishers.add(new Publishers("Activision", "activision@gmail.com", "2222222222"));
-      publishers.add(new Publishers("Scholastic Press", "scholasticpress@gmail.com", "3333333333"));
-      publishers.add(new Publishers("Delacorte Press", "delacortepress@gmail.com", "4444444444"));
-      publishers.add(new Publishers("Katherine Tegen Books", "katherinetegenbooks@gmail.com", "5555555555"));
+      entities.add(new Authoring_Entities("AnnaWeiner@gmail.com", "Anna Weiner"));
+      entities.add(new Authoring_Entities("FlynnBerry@gmail.com","Flynn Berry"));
+      entities.add(new Authoring_Entities("SarahPearse@gmail.com", "Sarah Pearse"));
+      entities.add(new Authoring_Entities("PatriciaEngel@gmail.com",  "Patricia Engel"));
+      entities.add(new Authoring_Entities("PenelopeLively@gmail.com", "Penelope Lively"));
+      
       booking.createEntity(publishers);
 
-      books.add(new Books("9396714171891", "Harry Potter", 2001, publishers.get(0),  entities.get(0)));
-      books.add(new Books("2321900032473", "Percy Jackson", 2002, publishers.get(1), entities.get(1)));
-      books.add(new Books("7022372062665", "Hunger Games", 2003, publishers.get(2), entities.get(2)));
-      books.add(new Books("5212348852569", "Maze Runner", 2004, publishers.get(3), entities.get(3)));
-      books.add(new Books("9311434127573", "Divergent", 2005, publishers.get(4), entities.get(4)));
+      books.add(new Books("9375638264859", "To Kill a Mocking Bird", 2002, publishers.get(0),  entities.get(0)));
+      books.add(new Books("8263548392726", "The Disappearances ", 2009, publishers.get(1), entities.get(1)));
+      books.add(new Books("8476252749585", "Beautiful Ruins", 2010, publishers.get(2), entities.get(2)));
+      books.add(new Books("9283746585746", "The Novice", 2018, publishers.get(3), entities.get(3)));
+      books.add(new Books("48572625474834", "Northern Spy", 2003, publishers.get(4), entities.get(4)));
 
 
       booking.displayPublishers();
