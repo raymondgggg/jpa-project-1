@@ -661,7 +661,7 @@ public void updateBooks(){
       entities.add(new Authoring_Entities("SarahPearse@gmail.com", "Sarah Pearse"));
       entities.add(new Authoring_Entities("PatriciaEngel@gmail.com",  "Patricia Engel"));
       entities.add(new Authoring_Entities("PenelopeLively@gmail.com", "Penelope Lively"));
-      
+
       booking.createEntity(publishers);
 
       books.add(new Books("9375638264859", "To Kill a Mocking Bird", 2002, publishers.get(0),  entities.get(0)));
