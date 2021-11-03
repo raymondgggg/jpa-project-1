@@ -4,6 +4,20 @@ import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
+@NamedNativeQuery(
+        name = "returnTeam",
+        query = "SELECT * " +
+                "FROM   Authoring_Entities " +
+                "WHERE authoring_entity_type = 'Ad Hoc Teams'",
+        resultClass = Ad_Hoc_Teams.class
+)
+@NamedNativeQuery(
+        name = "ReturnEmail",
+        query = "SELECT email " +
+                "FROM   Authoring_Entities " +
+                "WHERE authoring_entity_type = 'Ad Hoc Teams' and email = ?",
+        resultClass = Individual_Authors.class
+)
 /**
  * Class representation of team of authors
  */

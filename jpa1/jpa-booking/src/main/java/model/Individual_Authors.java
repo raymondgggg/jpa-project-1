@@ -9,6 +9,13 @@ import java.util.List;
  */
 @Entity
 @DiscriminatorValue("Individual Authors")
+@NamedNativeQuery(
+        name = "individualInfo",
+        query = "SELECT * " +
+                "FROM   Authoring_Entities " +
+                "WHERE authoring_entity_type = 'Individual Authors'",
+        resultClass = Individual_Authors.class
+)
 public class Individual_Authors extends Authoring_Entities{
     /**
      * List of teams the author is part of

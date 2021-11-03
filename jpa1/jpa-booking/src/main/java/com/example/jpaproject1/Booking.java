@@ -217,6 +217,7 @@ public void updateBooks(){
             }
             }
    }
+
    /**
     * Method to list the information about a specific book based on user's input of Title
     */
@@ -326,10 +327,45 @@ public void updateBooks(){
       }
    }
 
+   public void addAuthor2Team(){
+      List<Ad_Hoc_Teams> teamList = this.em.createNamedQuery("returnTeam", Ad_Hoc_Teams.class).getResultList();
+
+      Ad_Hoc_Teams team = new Ad_Hoc_Teams();
+
+      boolean exitCondition = false;
+      String usrInput;
+      do{
+         System.out.println("Enter the team email: ");
+         usrInput = getString();
+         List<Ad_Hoc_Teams> adHocTeamEmailList = this.em.createNamedQuery("ReturnEmail", Ad_Hoc_Teams.class).setParameter(1,usrInput).getResultList();
+         if (adHocTeamEmailList.size() != 0){
+            team = em.find(Ad_Hoc_Teams.class, usrInput); // validate team
+            exitCondition = true;
+         }
+      }while(exitCondition == false);
+
+      List<Individual_Authors> a = this.em.createNamedQuery("individualInfo", Individual_Authors.class).getResultList();
+
+      Individual_Authors ia = new Individual_Authors();
+
+      exitCondition = false;
+
+      do{
+         System.out.print("Enter the email of the author you would like to add: ");
+         String author = getString();
+         List<Individual_Authors> authorEmail = this.em.createNamedQuery("ReturnEmail", Individual_Authors.class).setParameter(1, author).getResultList();
+         if (authorEmail.size() !=0){
+            ia = em.find(Individual_Authors.class, author);
+            exitCondition = true;
+         }
+
+      }while(exitCondition == false);
+      team.addAuthor(ia);
+   }
+
    /**
     * Method to add a book object to the relational database
     */
-
    public void addBook(){
       Scanner input=new Scanner(System.in);
       System.out.println("What is book title");
@@ -400,11 +436,30 @@ public void updateBooks(){
    }
 
 
-
-
-
    public void addAdHocTeam(){
-      
+      System.out.print("Enter the name of the Ad Hoc Team: ");
+      String teamName = getString();
+
+      boolean valid = false;
+      while (!valid) {
+         System.out.print("Enter the email of the Ad Hoc Team: ");
+         String teamEmail = getString();
+         try{
+            if(teamEmail.contains("@") && teamEmail.contains(".")){
+//               List<Ad_hoc_teams> adHocTeamsEmail = this.entityManager.createNamedQuery("ReturnAllTeamEmail", Ad_hoc_teams.class).setParameter(1, teamEmail).getResultList();
+               List<Authoring_Entities> authEmail = this.em.createNamedQuery("ReturnEmail", Authoring_Entities.class).setParameter(1, teamEmail).getResultList();
+               if(authEmail.size() == 0) { //Validate Ad Hoc Team
+                  List<Ad_Hoc_Teams> team = new ArrayList<>();
+                  team.add(new Ad_Hoc_Teams(teamEmail, teamName, null));
+                  this.createEntity(team);
+                  System.out.println("Team has been added.");
+                  valid = true;
+               }
+            }
+         }catch(Exception e){
+            System.out.println("Invalid email");
+         }
+      }
    }
 
    /**
@@ -542,7 +597,7 @@ public void updateBooks(){
       }
       return input;
    } //End of the getIntRange method
-   
+
    /**
     * Method to add an individual author to the authoring entities table in the database.
     */
@@ -638,19 +693,17 @@ public void updateBooks(){
 
 
       booking.displayPublishers();
+
+      booking.createEntity(entities);
+      booking.createEntity(publishers);
+      booking.createEntity(books);
+
+      booking.addAdHocTeam();
+
       tx.commit();
 
 
-<<<<<<< Updated upstream
 
-      tx.commit();
-
-
-
-=======
-
-
->>>>>>> Stashed changes
 
 
    }
