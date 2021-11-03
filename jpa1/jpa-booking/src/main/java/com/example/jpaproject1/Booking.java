@@ -1,5 +1,10 @@
-package com.example.jpaproject1;
+/**
+ * @author Raymond Guevara Lozano
+ * @author Nabiha Bashir
+ * @author Rami Iskender
+ */
 
+package com.example.jpaproject1;
 import model.*;
 import org.apache.derby.impl.store.raw.log.Scan;
 
@@ -12,9 +17,7 @@ import java.util.*;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
-// rayRay
-// nabiha
-// rami
+
 public class Booking {
    /** Entity manager that will be used to interact with the database */
    private EntityManager em;
@@ -94,12 +97,10 @@ public class Booking {
             addBook();
             booksMenu();
             repeatMenu = false;
-
          }
          if (userChoice == 3){
             booksMenu();
             repeatMenu = false;
-
          }
          if (userChoice == 4){
             deleteBook();
@@ -115,7 +116,6 @@ public class Booking {
          if (userChoice == 6){
             displayMainMenu();
             repeatMenu = false;
-
          }
          if (userChoice == 7){
             repeatMenu = false;
@@ -141,17 +141,6 @@ public class Booking {
 
    }
 
-
-
-
-   //public void deleteBook(){
-      //List <Books> books = new ArrayList<>();
-      //books = this.em.createNamedQuery("allBooks", Books.class).getResultList();
-      //int book=getIntRange(0, books.size());
-   //}
-
-
-
    /**
     * Method to display all the books in the relational database
     */
@@ -169,6 +158,7 @@ public class Booking {
          System.out.println("No record of books exist.");
       }
    }
+
 /**
  * Updates book information
  */
@@ -192,10 +182,7 @@ public void updateBooks(){
    catch (Exception e){
       System.out.println("book name already exists in Authoring Entity");
    }
-
-
 }
-
    /**
     * adds a publisher
     */
@@ -415,6 +402,7 @@ public void updateBooks(){
 
 
 
+
    public void addAdHocTeam(){
       
    }
@@ -428,11 +416,11 @@ public void updateBooks(){
       System.out.println( "1. Display all Authoring Entities" );
       System.out.println( "2. Add an Authoring Entities" );
       System.out.println( "3. List information about Writing Groups" );
-<<<<<<< HEAD
+
       System.out.println( "4. Add individual Author\n" );
-=======
+
       System.out.println( "4. Return to Main Menu\n" );
->>>>>>> d8e0c822553c1fc374dd5c6e5438bc2393fcfd28
+
       System.out.println( "5. Exit\n" );
 
       System.out.println("Option: ");
@@ -554,7 +542,27 @@ public void updateBooks(){
       }
       return input;
    } //End of the getIntRange method
+   
+   /**
+    * Method to add an individual author to the authoring entities table in the database.
+    */
+   public void addIndividualAuthor(){
+      System.out.print("What is the name of the of the author: ");
+      String name = getString();
+      System.out.print("What is the email of the author: ");
+      String email = getString();
+      boolean exitCondition = false;
 
+      do {
+         List<Authoring_Entities> aEmail = this.em.createNamedQuery("displayAllAuthoringEntities", Authoring_Entities.class).setParameter(1,email).getResultList();
+         if (aEmail.size() == 0){
+            List<Individual_Authors> ia = new ArrayList<>();
+            ia.add(new Individual_Authors(email, name, null));
+            this.createEntity(ia);
+            exitCondition = true;
+         }
+      }while(exitCondition == false);
+   }
 
    /**
     * Takes in a string from the user.
@@ -586,6 +594,7 @@ public void updateBooks(){
          LOGGER.info("Persisted object after flush (non-null id): " + next);
       }
    } // End of createEntity member method
+
 
 
    public static void main(String[] args) {
@@ -636,12 +645,11 @@ public void updateBooks(){
 
 
 
-<<<<<<< Updated upstream
-=======
+
       tx.commit();
 
 
->>>>>>> Stashed changes
+
 
 
    }
