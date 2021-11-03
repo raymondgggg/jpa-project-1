@@ -5,6 +5,7 @@ import org.apache.derby.impl.store.raw.log.Scan;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import java.util.*;
 import java.util.Scanner;
@@ -289,15 +290,15 @@ public class Booking {
    /**
     * Method to add a book object to the relational database
     */
-   public void addBook(){
-      Scanner input=new Scanner(System.in);
-      System.out.println("What is book title");
-      String name=s
-      System.out.println("What is ISBM");
+//   public void addBook(){
+//      Scanner input=new Scanner(System.in);
+//      System.out.println("What is book title");
+//      String name=s
+//      System.out.println("What is ISBM");
+//
+//   }
 
 
-
-   }
 
    /**
     * Method that displays the interactions that the user
@@ -359,11 +360,6 @@ public class Booking {
       }
    }
 
-
-=======
-    * Displays primary keys for books, publishers, and authoring
-    */
->>>>>>> Stashed changes
    public void displayPrimaryKeys(){
       System.out.println("Books");
       List<Books> booksList= em.createNamedQuery("books",Books.class).getResultList();
@@ -408,13 +404,64 @@ public class Booking {
       return input;
    } //End of the getIntRange method
 
+   /**
+    * Create and persist a list of objects to the database.
+    * @param entities   The list of entities to persist.  These can be any object that has been
+    *                   properly annotated in JPA and marked as "persistable."  I specifically
+    *                   used a Java generic so that I did not have to write this over and over.
+    */
+   public <E> void createEntity(List <E> entities) {
+      for (E next : entities) {
+         LOGGER.info("Persisting: " + next);
+         // Use the CustomerOrders entityManager instance variable to get our EntityManager.
+         this.em.persist(next);
+      }
+
+      // The auto generated ID (if present) is not passed in to the constructor since JPA will
+      // generate a value.  So the previous for loop will not show a value for the ID.  But
+      // now that the Entity has been persisted, JPA has generated the ID and filled that in.
+      for (E next : entities) {
+         LOGGER.info("Persisted object after flush (non-null id): " + next);
+      }
+   } // End of createEntity member method
+
 
    public static void main(String[] args) {
+      LOGGER.fine("Creating EntityManagerFactory and EntityManager");
       EntityManagerFactory factory = Persistence.createEntityManagerFactory("Booking");
       EntityManager manager = factory.createEntityManager();
 
-      Booking db = new Booking(manager);
-      db.displayBooks();
+      // Create an instance of Books
+      Booking booking = new Booking(manager);
+
+      LOGGER.fine("Begin of Transaction");
+      EntityTransaction tx = manager.getTransaction();
+
+      tx.begin();
+
+      List <Authoring_Entities> entities = new ArrayList<>();
+      List <Publishers> publishers = new ArrayList<>();
+      List <Books> books = new ArrayList<>();
+
+
+      entities.add(new Authoring_Entities("company1@gmail.com", "James Gunn"));
+      entities.add(new Authoring_Entities("company2@gmail.com","Charles Park"));
+      entities.add(new Authoring_Entities("company3@gmail.com", "Nick James"));
+      entities.add(new Authoring_Entities("company4@gmail.com",  "Harley Madison"));
+      entities.add(new Authoring_Entities("company5@gmail.com", "Jessica Quinn"));
+
+      publishers.add(new Publishers("Bloomsbury Publishing", "bloomsburypublishing@gmail.com", "1111111111" ));
+      publishers.add(new Publishers("Activision", "activision@gmail.com", "2222222222"));
+      publishers.add(new Publishers("Scholastic Press", "scholasticpress@gmail.com", "3333333333"));
+      publishers.add(new Publishers("Delacorte Press", "delacortepress@gmail.com", "4444444444"));
+      publishers.add(new Publishers("Katherine Tegen Books", "katherinetegenbooks@gmail.com", "5555555555"));
+      booking.createEntity(publishers);
+
+      books.add(new Books("9396714171891", "Harry Potter", 2001, publishers.get(0),  entities.get(0)));
+      books.add(new Books("2321900032473", "Percy Jackson", 2002, publishers.get(1), entities.get(1)));
+      books.add(new Books("7022372062665", "Hunger Games", 2003, publishers.get(2), entities.get(2)));
+      books.add(new Books("5212348852569", "Maze Runner", 2004, publishers.get(3), entities.get(3)));
+      books.add(new Books("9311434127573", "Divergent", 2005, publishers.get(4), entities.get(4)));
    }
 
 
