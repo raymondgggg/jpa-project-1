@@ -124,7 +124,11 @@ public class Booking {
       while(repeatMenu);
    }
 
-
+   public void deleteBook(){
+      List <Books> books = new ArrayList<>();
+      books = this.em.createNamedQuery("allBooks", Books.class).getResultList();
+      int book=getIntRange(0, books.size());
+   }
 
    /**
     * Method to display all the books in the relational database
@@ -146,6 +150,7 @@ public class Booking {
 
    /**
     * Method to list the information about a specific book based on user's input of Title
+    */
     */
    public void listInfoBooks(){
       // Scanner to take user input on book title
@@ -297,11 +302,12 @@ public class Booking {
       String name=input.nextLine();
       System.out.println("What is ISBN");
       String isbn=input.nextLine();
-//      List<Books> books = this.em.createNamedQuery("bookIsbn", Books.class).setParameter(1, isbn).getResultList();//check unique isbn
-//      if (books.size() != 0){
-//         System.out.print("Error ISBN already in.");
-//      }
-//      else { //prompt book info
+
+      List<Books> books = this.em.createNamedQuery("bookIsbn", Books.class).setParameter(1, isbn).getResultList();//check unique isbn
+      if (books.size() != 0){
+         System.out.print("error. ISBN is already in.");
+      }
+      else { //prompt book info
          System.out.println("What year was this book published?");
          int year=getIntRange(0,2021);
          System.out.println("Who is the publisher");
@@ -324,7 +330,7 @@ public class Booking {
          catch (Exception e){
             System.out.println("error. Book name already exists with publisher or authoring entity");
          }
-//      }
+      }
    }
 
 
@@ -498,17 +504,20 @@ public class Booking {
       booking.createEntity(publishers);
       booking.createEntity(books);
 
-<<<<<<< Updated upstream
-      
+
 
       tx.commit();
 
 
-=======
+
       booking.addBook();
       tx.commit();
 
->>>>>>> Stashed changes
+
+      booking.addBook();
+      tx.commit();
+
+
    }
 
 
