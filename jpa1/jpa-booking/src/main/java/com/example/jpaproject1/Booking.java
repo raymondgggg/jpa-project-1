@@ -91,7 +91,6 @@ public class Booking {
             repeatMenu = false;
          }
          if (userChoice == 2){
-            //TODO: addBook()
             addBook();
             booksMenu();
             repeatMenu = false;
@@ -103,7 +102,7 @@ public class Booking {
 
          }
          if (userChoice == 4){
-            //TODO: deleteBook()
+            deleteBook();
             booksMenu();
             repeatMenu = false;
          }
@@ -129,19 +128,16 @@ public class Booking {
     * Method to delete book fropm database
     */
    public void deleteBook(){
-
-      System.out.println("what book do you want to delete");
-      List <Books> books = this.em.createNamedQuery("booksList", Books.class).getResultList();
+      List <Books> books = new ArrayList<>();
+      books = this.em.createNamedQuery("booksList", Books.class).getResultList();
+      int book=getIntRange(0, books.size());
+      books = this.em.createNamedQuery("booksList", Books.class).getResultList();
       for(int i=0; i<books.size();i++){
          System.out.println(i+" "+books.get(i));
       }
       Books deleteBook=books.get(getIntRange(0, books.size()));
       this.em.remove(deleteBook);
       System.out.println("Book is removed");
-
-      List <Books> books = new ArrayList<>();
-//      books = this.em.createNamedQuery("allBooks", Books.class).getResultList();
-      int book=getIntRange(0, books.size());
 
    }
 
@@ -166,7 +162,26 @@ public class Booking {
          System.out.println("No record of books exist.");
       }
    }
+/**
+ * Updates book information
+ */
+public void updateBooks(){
+   System.out.println("what book do you want to update");
+   List <Books> books = this.em.createNamedQuery("booksList", Books.class).getResultList();
+   for(int i=0; i<books.size();i++){
+      System.out.println(i+" "+books.get(i));
+   }
+   Books updateBook=books.get(getIntRange(0, books.size()));
+   System.out.println("Who is the authoring entity");
+   List <Authoring_Entities> auth = this.em.createNamedQuery("displayAllAuthoringEntities", Authoring_Entities.class).getResultList();
+   for (int i=0;i< auth.size();i++){
+      System.out.println(i+" "+auth.get(i).getName());
+   }
+   int authChoice=getIntRange(0,auth.size());
+   Authoring_Entities newAuth = auth.get(authChoice);
 
+
+}
    /**
     * Method to list the information about a specific book based on user's input of Title
     */
@@ -218,13 +233,12 @@ public class Booking {
       System.out.println( "1. Display all Publishers" );
       System.out.println( "2. Add a Publisher" );
       System.out.println( "3. List information about a Publisher" );
-      System.out.println( "4. Return to Main Menu\n" );
-      System.out.println( "5. Exit\n" );
+      System.out.println( "4. Exit\n" );
 
       // scanner to take user input for main menu
 
       System.out.println("Option: ");
-      int userChoice = getIntRange(1, 5);
+      int userChoice = getIntRange(1, 4);
       boolean repeatMenu = true;
 
       do{
@@ -241,11 +255,6 @@ public class Booking {
 
          }
          else if (userChoice == 4){
-            //TODO: return2main()
-            repeatMenu = false;
-
-         }
-         else if (userChoice == 5){
             repeatMenu = false;
          }
 
