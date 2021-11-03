@@ -287,7 +287,7 @@ public void updateBooks(){
    public void displayPublishers(){
       List<Publishers> publishers = em.createNamedQuery("displayAllPublishers", Publishers.class).getResultList();
       System.out.println("List of all Publishers");
-      System.out.println("NAME    EMAIL     PHONE");
+      System.out.println("NAME              EMAIL                  PHONE");
 
       if(!publishers.isEmpty()) {
          for (Publishers publisher : publishers) {
@@ -636,20 +636,21 @@ public void updateBooks(){
       books.add(new Books("5212348852569", "Maze Runner", 2004, publishers.get(3), entities.get(3)));
       books.add(new Books("9311434127573", "Divergent", 2005, publishers.get(4), entities.get(4)));
 
-      booking.createEntity(entities);
-      booking.createEntity(publishers);
-      booking.createEntity(books);
-      booking.addPublisher();
+
+      booking.displayPublishers();
+      tx.commit();
+
+
+<<<<<<< Updated upstream
+
       tx.commit();
 
 
 
+=======
 
 
-      tx.commit();
-
-
-
+>>>>>>> Stashed changes
 
 
    }
