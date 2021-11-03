@@ -153,7 +153,7 @@ public class Booking {
     * Method that displays the interactions that the user
     * can have with the publishers entity
     */
-   public static void publishersMenu(){
+   public void publishersMenu(){
       System.out.println( "\n-----Publishers Menu-----\nPlease select an option.\n" );
       System.out.println( "1. Display all Publishers" );
       System.out.println( "2. Add a Publisher" );
@@ -197,7 +197,7 @@ public class Booking {
    /**
     * Method to add a book object to the relational database
     */
-   public static void addBook(){
+   public void addBook(){
 
    }
 
@@ -205,7 +205,7 @@ public class Booking {
     * Method that displays the interactions that the user
     * can have with the authoring entity
     */
-   public static void authoringEntitiesMenu(){
+   public void authoringEntitiesMenu(){
       System.out.println( "\n-----Authoring Entities Menu-----\nPlease select an option.\n" );
       System.out.println( "1. Display all Authoring Entities" );
       System.out.println( "2. Add an Authoring Entities" );
