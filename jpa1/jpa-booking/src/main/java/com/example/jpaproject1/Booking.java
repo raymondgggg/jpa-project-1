@@ -147,6 +147,46 @@ public class Booking {
       }
    }
 
+   /**
+    * Method to list the information about a specific book based on user's input of Title
+    */
+   public void listInfoBooks(){
+      // Scanner to take user input on book title
+      Scanner scanner = new Scanner(System.in);
+
+      // display all Titles of books available to user
+      displayBookTitles();
+
+      // prompt user to enter a book title
+      System.out.println("Please enter the Title of the Book you want to view: ");
+      String desiredBook = scanner.nextLine();
+
+      // executes the query to get the result of the book with the desired title
+      List<Books> books = em.createNamedQuery("findBook", Books.class).setParameter(1, desiredBook).getResultList();
+
+      // if a valid book title is entered, display information about that specific book
+      if(!books.isEmpty()) {
+         for (Books book : books) {
+            System.out.println(book);
+         }
+      }
+      // if user enters a book title which does not exist
+      else{
+         System.out.println("You have entered an invalid Book Title.");
+      }
+   }
+
+   /**
+    * Method to display all the titles of the books in the relational database
+    */
+   public void displayBookTitles(){
+      System.out.println("Book Titles");
+      List<Books> booksList= em.createNamedQuery("bookTitles",Books.class).getResultList();
+      for(Books book:booksList){
+         System.out.println(book);
+      }
+   }
+
 
 
    /**
@@ -192,6 +232,64 @@ public class Booking {
          }
 
       }while(repeatMenu);
+   }
+
+   /**
+    * Method to display all the publishers in the relational database
+    */
+   public void displayPublishers(){
+      List<Publishers> publishers = em.createNamedQuery("displayAllPublishers", Publishers.class).getResultList();
+      System.out.println("List of all Publishers");
+      System.out.println("NAME    EMAIL     PHONE");
+
+      if(!publishers.isEmpty()) {
+         for (Publishers publisher : publishers) {
+            System.out.println(publisher);
+         }
+      }
+      else{
+         System.out.println("No record of Publishers exist.");
+      }
+   }
+
+   /**
+    * Method to list the information about a specific publisher based on user's input of Name
+    */
+   public void listInfoPublisher(){
+      // Scanner to take user input on publisher name
+      Scanner scanner = new Scanner(System.in);
+
+      // display all the Names of publishers available to user
+      displayPublisherNames();
+
+      // prompt user to enter a publisher name
+      System.out.println("Please enter the Name of the Publisher you want to view: ");
+      String desiredPublihser = scanner.nextLine();
+
+      // executes the query to get the result of the publisher with the chosen name
+      List<Publishers> publishers = em.createNamedQuery("findPublisher", Publishers.class).setParameter(1, desiredPublihser).getResultList();
+
+      // if a valid publisher name is entered, display information about that specific publisher
+      if(!publishers.isEmpty()) {
+         for (Publishers publisher : publishers) {
+            System.out.println(publisher);
+         }
+      }
+      // if user enters a publisher name which does not exist
+      else{
+         System.out.println("You have entered an invalid Publisher Name.");
+      }
+   }
+
+   /**
+    * Method to display all the names of the publishers in the relational database
+    */
+   public void displayPublisherNames(){
+      System.out.println("Publisher Names");
+      List<Publishers> publishersList = em.createNamedQuery("publisherNames",Publishers.class).getResultList();
+      for(Publishers publisher:publishersList){
+         System.out.println(publisher);
+      }
    }
 
    /**
@@ -241,6 +339,25 @@ public class Booking {
       }
       while(repeatMenu);
    }
+
+   /**
+    * Method to display all the Authoring Entities in the relational database
+    */
+   public void displayAuthoringEntities(){
+      List<Authoring_Entities> authoringEntities = em.createNamedQuery("displayAllAuthoringEntities", Authoring_Entities.class).getResultList();
+      System.out.println("List of all Authoring Entities");
+      System.out.println("EMAIL    AUTHORING_TYPE     NAME     HEAD_WRITER    YEAR_FORMED");
+
+      if(!authoringEntities.isEmpty()) {
+         for (Authoring_Entities authoringEntity : authoringEntities) {
+            System.out.println(authoringEntity);
+         }
+      }
+      else{
+         System.out.println("No record of Authoring Entities exist.");
+      }
+   }
+
 
    public void displayPrimaryKeys(){
       System.out.println("Books");

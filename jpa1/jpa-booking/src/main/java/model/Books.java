@@ -17,6 +17,11 @@ import java.util.Objects;
         query = "SELECT title, isbn " +
                 "FROM   BOOKS"
 )
+@NamedNativeQuery(
+        name="bookTitles",
+        query = "SELECT title " +
+                "FROM   BOOKS"
+)
 
 @NamedNativeQuery(
         name= "displayAllBooks",
@@ -24,6 +29,13 @@ import java.util.Objects;
         resultClass = Books.class
 )
 
+@NamedNativeQuery(
+        name="findBook",
+        query = "SELECT * " +
+                "FROM   BOOKS " +
+                "WHERE  TITLE = ? ",
+        resultClass = Books.class
+)
 
 
 public class Books {

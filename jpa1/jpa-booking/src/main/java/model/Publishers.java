@@ -15,6 +15,19 @@ import java.util.Objects;
         query = "SELECT name"+
                 "FROM   Publishers"
 )
+@NamedNativeQuery(
+        name="publisherNames",
+        query = "SELECT name " +
+                "FROM   PUBLISHERS"
+)
+
+@NamedNativeQuery(
+        name="findPublisher",
+        query = "SELECT * " +
+                "FROM   PUBLISHER " +
+                "WHERE  NAME  = ? ",
+        resultClass = Publishers.class
+)
 public class Publishers {
 
     /**
