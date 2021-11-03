@@ -12,20 +12,18 @@ import java.util.Objects;
         {"title", "publisher_name"}),
         @UniqueConstraint(columnNames =
                 {"title", "authoring_entity_name"})})
-@NamedNativeQuery(
-        name="books",
-        query = "SELECT title, isbn " +
-                "FROM   BOOKS"
-)
+
 @NamedNativeQuery(
         name="bookTitles",
         query = "SELECT title " +
                 "FROM   BOOKS"
 )
 
+
 @NamedNativeQuery(
-        name= "displayAllBooks",
-        query = "SELECT * FROM BOOKS",
+        name= "bookIsbn",
+        query = "SELECT * FROM BOOKS"+
+        "WHERE  isbn = ? ",
         resultClass = Books.class
 )
 

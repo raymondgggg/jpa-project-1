@@ -91,6 +91,7 @@ public class Booking {
          }
          if (userChoice == 2){
             //TODO: addBook()
+            addBook();
             booksMenu();
             repeatMenu = false;
 
@@ -130,7 +131,7 @@ public class Booking {
     * Method to display all the books in the relational database
     */
    public void displayBooks(){
-      List<Books> books = em.createNamedQuery("displayAllBooks", Books.class).getResultList();
+      List<Books> books = em.createNamedQuery("bookIsbn", Books.class).getResultList();
       System.out.println("List of all books");
       System.out.println("ISBN    TITLE     YEAR PUBLISHED      AUTHORING ENTITY    PUBLISHER");
 
@@ -292,13 +293,46 @@ public class Booking {
    /**
     * Method to add a book object to the relational database
     */
-//   public void addBook(){
-//      Scanner input=new Scanner(System.in);
-//      System.out.println("What is book title");
-//      String name=s
-//      System.out.println("What is ISBM");
-//
-//   }
+
+   public void addBook(){
+      Scanner input=new Scanner(System.in);
+      System.out.println("What is book title");
+      String name=input.nextLine();
+      System.out.println("What is ISBM");
+      String isbn=input.nextLine();
+      List<Books> books = this.em.createNamedQuery("bookIsbn", Books.class).setParameter(1, isbn).getResultList();//check unique isbn
+      if (books.size() != 0){
+         System.out.print("Duplicate ISBN.");
+      }
+      else { //prompt book info
+         System.out.println("What year was this book published?");
+         int year=getIntRange(0,2021);
+         System.out.println("Who is the publisher");
+         List <Publishers> publishers = this.em.createNamedQuery("displayAllPublishers", Publishers.class).getResultList();
+         for (int i=0;i< publishers.size();i++){
+            System.out.println(i+publishers.get(i).getName());
+         }
+         int choice=getIntRange(0,publishers.size());
+         System.out.println("Who is the authoring entity");
+         List <Authoring_Entities> auth = this.em.createNamedQuery("displayAllAuthoringEntities", Authoring_Entities.class).getResultList();
+         for (int i=0;i< auth.size();i++){
+            System.out.println(i+auth.get(i).getName());
+         }
+         int authChoice=getIntRange(0,auth.size());
+         ArrayList<Books> book = new ArrayList<Books>();
+         try {
+            book.add(new Books(isbn, name, year, publishers.get(choice), auth.get(authChoice)));
+            this.createEntity(book);
+         }
+         catch (Exception e){
+            System.out.println("error. Book name already exists with publisher or authoring entity");
+         }
+      }
+   }
+
+
+
+
 
 
 
@@ -343,10 +377,7 @@ public class Booking {
       while(repeatMenu);
    }
 
-   /**
-<<<<<<< Updated upstream
-    * Method to display all the Authoring Entities in the relational database
-    */
+
    public void displayAuthoringEntities(){
       List<Authoring_Entities> authoringEntities = em.createNamedQuery("displayAllAuthoringEntities", Authoring_Entities.class).getResultList();
       System.out.println("List of all Authoring Entities");
@@ -364,19 +395,19 @@ public class Booking {
 
    public void displayPrimaryKeys(){
       System.out.println("Books");
-      List<Books> booksList= em.createNamedQuery("books",Books.class).getResultList();
+      List<Books> booksList= em.createNamedQuery("bookIsbn",Books.class).getResultList();
       for(Books book:booksList){
-         System.out.println(book);
+         System.out.println(book.getIsbn());
       }
       System.out.println("Publishers");
       List<Publishers> publishersList =  em.createNamedQuery("publishers",Publishers.class).getResultList();
       for(Publishers publishers:publishersList){
-         System.out.println(publishersList);
+         System.out.println(publishers.getName());
       }
       System.out.println("Authoring Entities");
       List<Authoring_Entities> authoringList= em.createNamedQuery("authoring", Authoring_Entities.class).getResultList();
       for(Authoring_Entities auth:authoringList){
-         System.out.println(auth);
+         System.out.println(auth.getEmail());
       }
 
    }
