@@ -56,7 +56,8 @@ public class Booking {
             authoringEntitiesMenu();
          }
          else if (userChoice == 4){
-            // TODO: displayPrimaryKeys();
+            displayPrimaryKeys();
+            repeatMenu = false;
          }
          else if (userChoice == 5){
             repeatMenu = false;
