@@ -126,8 +126,14 @@ public class Booking {
 
    public void deleteBook(){
       List <Books> books = new ArrayList<>();
-      books = this.em.createNamedQuery("allBooks", Books.class).getResultList();
-      int book=getIntRange(0, books.size());
+      books = this.em.createNamedQuery("books", Books.class).getResultList();
+      for(int i=0; i<books.size();i++){
+         System.out.println(i+" "+books.get(i));
+      }
+      Books deleteBook=books.get(getIntRange(0, books.size()));
+      this.em.remove(deleteBook);
+      System.out.println("Book is removed");
+
    }
 
    /**
@@ -312,13 +318,13 @@ public class Booking {
          System.out.println("Who is the publisher");
          List <Publishers> publishers = this.em.createNamedQuery("displayAllPublishers", Publishers.class).getResultList();
          for (int i=0;i< publishers.size();i++){
-            System.out.println(i+publishers.get(i).getName());
+            System.out.println(i+" "+publishers.get(i).getName());
          }
          int choice=getIntRange(0,publishers.size());
          System.out.println("Who is the authoring entity");
          List <Authoring_Entities> auth = this.em.createNamedQuery("displayAllAuthoringEntities", Authoring_Entities.class).getResultList();
          for (int i=0;i< auth.size();i++){
-            System.out.println(i+auth.get(i).getName());
+            System.out.println(i+" "+auth.get(i).getName());
          }
          int authChoice=getIntRange(0,auth.size());
          ArrayList<Books> book = new ArrayList<Books>();
@@ -509,11 +515,7 @@ public class Booking {
 
 
 
-      booking.addBook();
-      tx.commit();
-
-
-      booking.addBook();
+      booking.deleteBook();
       tx.commit();
 
 
