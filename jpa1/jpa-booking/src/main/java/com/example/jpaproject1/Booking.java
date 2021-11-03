@@ -464,6 +464,12 @@ public class Booking {
       books.add(new Books("7022372062665", "Hunger Games", 2003, publishers.get(2), entities.get(2)));
       books.add(new Books("5212348852569", "Maze Runner", 2004, publishers.get(3), entities.get(3)));
       books.add(new Books("9311434127573", "Divergent", 2005, publishers.get(4), entities.get(4)));
+
+      booking.createEntity(entities);
+      booking.createEntity(publishers);
+      booking.createEntity(books);
+
+      tx.commit();
    }
 
 
