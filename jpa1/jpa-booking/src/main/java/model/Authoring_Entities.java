@@ -70,6 +70,8 @@ public class Authoring_Entities {
      */
     @Override
     public String toString(){
-        return "{email: " + this.email + ", name: " + this.name + "}";
+        return  this.email + "      "+
+                name + "      "+
+                this.name ;
     }
 }

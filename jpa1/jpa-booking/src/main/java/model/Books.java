@@ -16,7 +16,8 @@ import java.util.Objects;
 @NamedNativeQuery(
         name="bookTitles",
         query = "SELECT title " +
-                "FROM   BOOKS"
+                "FROM   BOOKS",
+        resultClass = Books.class
 )
 
 
@@ -26,7 +27,12 @@ import java.util.Objects;
         "WHERE  isbn = ? ",
         resultClass = Books.class
 )
-
+@NamedNativeQuery(
+        name= "displayAllBooks",
+        query = "SELECT * " +
+                "FROM   BOOKS",
+        resultClass = Books.class
+)
 @NamedNativeQuery(
         name="findBook",
         query = "SELECT * " +
@@ -168,13 +174,12 @@ public class Books {
      */
     @Override
     public String toString() {
-        return "Books{" +
-                "isbn=" + isbn +
-                ", title='" + title + '\'' +
-                ", yearPublished=" + year_published +
-                ", publisher=" + publisher_name +
-                ", authoringEntity=" + authoring_entity_name +
-                '}';
+        return   isbn + "  \t  " +
+                 title + "  \t   " +
+                 year_published + "  \t  " +
+                 this.getAuthoring_entity_name() + "  \t  " +
+                 this.getPublisher_name()  ;
+
     }
 
     /**

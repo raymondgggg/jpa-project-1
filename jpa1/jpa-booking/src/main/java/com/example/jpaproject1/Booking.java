@@ -85,8 +85,8 @@ public class Booking {
 
       do{
          if (userChoice == 1){
-            displayBooks();
-            // booksMenu();
+            //displayBooks();
+            booksMenu();
             repeatMenu = false;
          }
          if (userChoice == 2){
@@ -97,7 +97,6 @@ public class Booking {
 
          }
          if (userChoice == 3){
-            //TODO: listInfoBooks()
             booksMenu();
             repeatMenu = false;
 
@@ -131,7 +130,7 @@ public class Booking {
     * Method to display all the books in the relational database
     */
    public void displayBooks(){
-      List<Books> books = em.createNamedQuery("bookIsbn", Books.class).getResultList();
+      List<Books> books = em.createNamedQuery("displayAllBooks", Books.class).getResultList();
       System.out.println("List of all books");
       System.out.println("ISBN    TITLE     YEAR PUBLISHED      AUTHORING ENTITY    PUBLISHER");
 
@@ -207,7 +206,6 @@ public class Booking {
 
       do{
          if (userChoice == 1){
-            //TODO: displayPublishers()
             repeatMenu = false;
          }
          else if (userChoice == 2){
@@ -216,7 +214,6 @@ public class Booking {
 
          }
          else if (userChoice == 3){
-            //TODO: list information about publisher
             repeatMenu = false;
 
          }
@@ -355,7 +352,6 @@ public class Booking {
 
       do{
          if (userChoice == 1){
-            //TODO: displayAuthoringEntities()
             repeatMenu = false;
          }
          if (userChoice == 2){
@@ -367,7 +363,7 @@ public class Booking {
             repeatMenu = false;
          }
          if (userChoice == 4){
-//            displayMainMenu();
+//        // displayMainMenu();
             repeatMenu = false;
          }
          if (userChoice == 5){
@@ -500,7 +496,11 @@ public class Booking {
       booking.createEntity(publishers);
       booking.createEntity(books);
 
+      
+
       tx.commit();
+
+
    }
 
 

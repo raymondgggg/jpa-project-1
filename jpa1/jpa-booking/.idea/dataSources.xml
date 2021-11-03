@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="booking" uuid="6f1d99a9-18de-4f69-8738-4be20d3dc85a">
+    <data-source source="LOCAL" name="booking" uuid="dc0cec14-57d2-44c8-9ec5-d00bef1031ac">
       <driver-ref>derby.embedded</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.apache.derby.jdbc.EmbeddedDriver</jdbc-driver>

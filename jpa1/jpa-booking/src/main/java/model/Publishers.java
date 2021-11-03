@@ -131,11 +131,9 @@ public class Publishers {
      */
     @Override
     public String toString() {
-        return "Publishers{" +
-                "name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", phone='" + phone + '\'' +
-                '}';
+        return  name + "             " +
+                email + "             " +
+                phone ;
     }
 
     /**
