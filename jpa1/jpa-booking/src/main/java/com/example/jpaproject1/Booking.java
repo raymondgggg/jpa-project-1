@@ -437,33 +437,6 @@ public void updateBooks(){
       }while(exitConditon == false);
    }
 
-
-   public void addAdHocTeam(){
-      System.out.print("Enter the name of the Ad Hoc Team: ");
-      String teamName = getString();
-
-      boolean valid = false;
-      while (!valid) {
-         System.out.print("Enter the email of the Ad Hoc Team: ");
-         String teamEmail = getString();
-         try{
-            if(teamEmail.contains("@") && teamEmail.contains(".")){
-//               List<Ad_hoc_teams> adHocTeamsEmail = this.entityManager.createNamedQuery("ReturnAllTeamEmail", Ad_hoc_teams.class).setParameter(1, teamEmail).getResultList();
-               List<Authoring_Entities> authEmail = this.em.createNamedQuery("ReturnEmail", Authoring_Entities.class).setParameter(1, teamEmail).getResultList();
-               if(authEmail.size() == 0) { //Validate Ad Hoc Team
-                  List<Ad_Hoc_Teams> team = new ArrayList<>();
-                  team.add(new Ad_Hoc_Teams(teamEmail, teamName, null));
-                  this.createEntity(team);
-                  System.out.println("Team has been added.");
-                  valid = true;
-               }
-            }
-         }catch(Exception e){
-            System.out.println("Invalid email");
-         }
-      }
-   }
-
    /**
     * Method that displays the interactions that the user
     * can have with the authoring entity
@@ -471,14 +444,14 @@ public void updateBooks(){
    public void authoringEntitiesMenu(){
       System.out.println( "\n-----Authoring Entities Menu-----\nPlease select an option.\n" );
       System.out.println( "1. Display all Authoring Entities" );
-      System.out.println( "2. Add an Authoring Entities" );
+      System.out.println( "2. Add ad hoc team" );
       System.out.println( "3. List information about Writing Groups" );
 
       System.out.println( "4. Add individual Author\n" );
 
-      System.out.println( "4. Return to Main Menu\n" );
+      System.out.println( "5. Add writing group" );
 
-      System.out.println( "5. Exit\n" );
+      System.out.println( "6. Exit\n" );
 
       System.out.println("Option: ");
       int userChoice = getIntRange(1, 5);
@@ -487,21 +460,26 @@ public void updateBooks(){
 
       do{
          if (userChoice == 1){
+            displayAuthoringEntities();
             repeatMenu = false;
          }
          if (userChoice == 2){
-            //TODO: addAuthoringEntities()
+//            addAdHocTeam();
             repeatMenu = false;
          }
          if (userChoice == 3){
-            //TODO: listInfoWritingGroups()
+            listInfoAuthoringEntity();
             repeatMenu = false;
          }
          if (userChoice == 4){
-//        // displayMainMenu();
+            addIndividualAuthor();
             repeatMenu = false;
          }
          if (userChoice == 5){
+            addWritingGroup();
+            repeatMenu = false;
+         }
+         if (userChoice == 6){
             repeatMenu = false;
          }
       }
@@ -695,10 +673,12 @@ public void updateBooks(){
 
 
 
+
       booking.createEntity(entities);
       booking.createEntity(publishers);
       booking.createEntity(books);
-      booking.displayBooks();
+      tx.commit();
+
       boolean exitCondition = false;
 
       do{
