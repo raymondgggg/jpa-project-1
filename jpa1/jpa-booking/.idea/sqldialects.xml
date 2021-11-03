@@ -7,6 +7,6 @@
     <file url="file://$PROJECT_DIR$/src/main/java/model/Individual_Authors.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/model/Publishers.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/model/Writing_Groups.java" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/sql/seed-data.sql" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/sql/seed-data.sql" dialect="Derby" />
   </component>
 </project>

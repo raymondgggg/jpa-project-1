@@ -5,11 +5,7 @@ import java.util.Objects;
 
 /**Class representation of the publishers*/
 @Entity
-@NamedNativeQuery(
-        name="books",
-        query = "SELECT title, isbn " +
-                "FROM   BOOKS"
-)
+
 @NamedNativeQuery(
         name="publishers",
         query = "SELECT name"+

@@ -85,8 +85,8 @@ public class Booking {
 
       do{
          if (userChoice == 1){
-            // TODO : displaybooks()
-            booksMenu();
+            displayBooks();
+            // booksMenu();
             repeatMenu = false;
          }
          if (userChoice == 2){
@@ -123,6 +123,8 @@ public class Booking {
       }
       while(repeatMenu);
    }
+
+
 
    /**
     * Method to display all the books in the relational database
