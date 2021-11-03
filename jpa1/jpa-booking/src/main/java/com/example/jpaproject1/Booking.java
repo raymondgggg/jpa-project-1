@@ -377,7 +377,9 @@ public void updateBooks(){
       }
    }
 
-
+   /**
+    * Method to add a writing group to database
+    */
    public void addWritingGroup(){
       System.out.print("What is the name of the group: ");
       String writingGroup = getString();
@@ -451,7 +453,9 @@ public void updateBooks(){
       while(repeatMenu);
    }
 
-
+   /**
+    * Method display the authoring entities
+    */
    public void displayAuthoringEntities(){
       List<Authoring_Entities> authoringEntities = em.createNamedQuery("displayAllAuthoringEntities", Authoring_Entities.class).getResultList();
       System.out.println("List of all Authoring Entities");
@@ -608,9 +612,5 @@ public void updateBooks(){
 
 
    }
-
-
-
-
-
+   
 }
