@@ -13,7 +13,12 @@ import javax.persistence.*;
         query = "SELECT email " +
                 "FROM    Authoring_Entities"
 )
-
+@NamedNativeQuery(
+        name= "allAuth",
+        query = "SELECT * " +
+                "FROM Authoring_Entities ",
+        resultClass = Authoring_Entities.class
+)
 @NamedNativeQuery(
         name= "displayAllAuthoringEntities",
         query = "SELECT * " +

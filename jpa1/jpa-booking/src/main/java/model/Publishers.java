@@ -31,6 +31,20 @@ import java.util.Objects;
                 "WHERE  NAME  = ? ",
         resultClass = Publishers.class
 )
+@NamedNativeQuery(
+        name="pubEmail",
+        query = "SELECT * " +
+                "FROM   PUBLISHERS " +
+                "WHERE  email  = ? ",
+        resultClass = Publishers.class
+)
+@NamedNativeQuery(
+        name="pubPhones",
+        query = "SELECT * " +
+                "FROM   PUBLISHERS " +
+                "WHERE  phones  = ? ",
+        resultClass = Publishers.class
+)
 public class Publishers {
 
     /**
