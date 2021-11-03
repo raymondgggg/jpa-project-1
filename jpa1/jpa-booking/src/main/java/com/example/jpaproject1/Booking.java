@@ -140,19 +140,7 @@ public class Booking {
       System.out.println("Book is removed");
 
    }
-
-<<<<<<< Updated upstream
-
-
-=======
-   //public void deleteBook(){
-      //List <Books> books = new ArrayList<>();
-      //books = this.em.createNamedQuery("allBooks", Books.class).getResultList();
-      //int book=getIntRange(0, books.size());
-   //}
->>>>>>> Stashed changes
-
-
+   
    /**
     * Method to display all the books in the relational database
     */
@@ -594,7 +582,7 @@ public void updateBooks(){
       booking.createEntity(books);
 
 
-<<<<<<< Updated upstream
+
 
 
       booking.deleteBook();
@@ -603,9 +591,9 @@ public void updateBooks(){
 
       booking.addWritingGroup();
 
-=======
+
       booking.listInfoPublisher();
->>>>>>> Stashed changes
+
       tx.commit();
 
 
