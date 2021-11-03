@@ -365,6 +365,8 @@ public void updateBooks(){
       }
    }
 
+
+
    /**
     * Method to add a writing group to database
     */
@@ -398,6 +400,26 @@ public void updateBooks(){
    }
 
 
+   /**
+    * Method to add an individual author to the authoring entities table in the database.
+    */
+   public void addIndividualAuthor(){
+      System.out.print("What is the name of the of the author: ");
+      String name = getString();
+      System.out.print("What is the email of the author: ");
+      String email = getString();
+      boolean exitCondition = false;
+
+      do {
+         List<Authoring_Entities> aEmail = this.em.createNamedQuery("displayAllAuthoringEntities", Authoring_Entities.class).setParameter(1,email).getResultList();
+         if (aEmail.size() == 0){
+            List<Individual_Authors> ia = new ArrayList<>();
+            ia.add(new Individual_Authors(email, name, null));
+            this.createEntity(ia);
+            exitCondition = true;
+         }
+      }while(exitCondition == false);
+   }
 
 
 
@@ -408,9 +430,9 @@ public void updateBooks(){
    public void authoringEntitiesMenu(){
       System.out.println( "\n-----Authoring Entities Menu-----\nPlease select an option.\n" );
       System.out.println( "1. Display all Authoring Entities" );
-      System.out.println( "2. Add an Authoring Entities" );
+      System.out.println( "2. Add Ad Hoc Team" ); // me
       System.out.println( "3. List information about Writing Groups" );
-      System.out.println( "4. Return to Main Menu\n" );
+      System.out.println( "4. Add individual Author\n" ); // me
       System.out.println( "5. Exit\n" );
 
       System.out.println("Option: ");
@@ -439,6 +461,10 @@ public void updateBooks(){
          }
       }
       while(repeatMenu);
+   }
+
+   public void addAuthoringEntities(){
+      System.out.println();
    }
 
    /**
@@ -583,16 +609,16 @@ public void updateBooks(){
 
 
 
-
-
-      booking.deleteBook();
-
-      booking.addWritingGroup();
-
-      booking.addWritingGroup();
-
-
-      booking.listInfoPublisher();
+      booking.addIndividualAuthor();
+//
+//      booking.deleteBook();
+//
+//      booking.addWritingGroup();
+//
+//      booking.addWritingGroup();
+//
+//
+//      booking.listInfoPublisher();
 
       tx.commit();
 
