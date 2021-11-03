@@ -22,6 +22,13 @@ import java.util.Objects;
 )
 
 @NamedNativeQuery(
+        name= "displayAllPublishers",
+        query = "SELECT * " +
+                "FROM   PUBLISHERS",
+        resultClass = Publishers.class
+)
+
+@NamedNativeQuery(
         name="findPublisher",
         query = "SELECT * " +
                 "FROM   PUBLISHER " +
