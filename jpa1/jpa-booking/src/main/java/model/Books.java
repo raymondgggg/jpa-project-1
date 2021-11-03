@@ -23,7 +23,8 @@ import java.util.Objects;
 
 @NamedNativeQuery(
         name= "bookIsbn",
-        query = "SELECT * FROM BOOKS"+
+        query = "SELECT *" +
+                " FROM BOOKS" +
         "WHERE  isbn = ? ",
         resultClass = Books.class
 )

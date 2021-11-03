@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+<<<<<<< Updated upstream
     <data-source source="LOCAL" name="booking" uuid="dc0cec14-57d2-44c8-9ec5-d00bef1031ac">
+=======
+    <data-source source="LOCAL" name="booking" uuid="3868d59d-9cc2-4d2a-bee9-2cbf37519cea">
+>>>>>>> Stashed changes
       <driver-ref>derby.embedded</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.apache.derby.jdbc.EmbeddedDriver</jdbc-driver>

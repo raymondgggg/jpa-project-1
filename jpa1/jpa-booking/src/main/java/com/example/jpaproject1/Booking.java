@@ -295,13 +295,13 @@ public class Booking {
       Scanner input=new Scanner(System.in);
       System.out.println("What is book title");
       String name=input.nextLine();
-      System.out.println("What is ISBM");
+      System.out.println("What is ISBN");
       String isbn=input.nextLine();
-      List<Books> books = this.em.createNamedQuery("bookIsbn", Books.class).setParameter(1, isbn).getResultList();//check unique isbn
-      if (books.size() != 0){
-         System.out.print("Duplicate ISBN.");
-      }
-      else { //prompt book info
+//      List<Books> books = this.em.createNamedQuery("bookIsbn", Books.class).setParameter(1, isbn).getResultList();//check unique isbn
+//      if (books.size() != 0){
+//         System.out.print("Error ISBN already in.");
+//      }
+//      else { //prompt book info
          System.out.println("What year was this book published?");
          int year=getIntRange(0,2021);
          System.out.println("Who is the publisher");
@@ -324,7 +324,7 @@ public class Booking {
          catch (Exception e){
             System.out.println("error. Book name already exists with publisher or authoring entity");
          }
-      }
+//      }
    }
 
 
@@ -456,12 +456,14 @@ public class Booking {
 
 
    public static void main(String[] args) {
+
       LOGGER.fine("Creating EntityManagerFactory and EntityManager");
       EntityManagerFactory factory = Persistence.createEntityManagerFactory("Booking");
       EntityManager manager = factory.createEntityManager();
 
       // Create an instance of Books
       Booking booking = new Booking(manager);
+
 
       LOGGER.fine("Begin of Transaction");
       EntityTransaction tx = manager.getTransaction();
@@ -496,11 +498,17 @@ public class Booking {
       booking.createEntity(publishers);
       booking.createEntity(books);
 
+<<<<<<< Updated upstream
       
 
       tx.commit();
 
 
+=======
+      booking.addBook();
+      tx.commit();
+
+>>>>>>> Stashed changes
    }
 
 
