@@ -16,14 +16,14 @@ import javax.persistence.*;
 @NamedNativeQuery(
         name= "allAuth",
         query = "SELECT * " +
-                "FROM Authoring_Entities ",
+                "FROM Authoring_Entities " +
+                "WHERE EMAIL = ?" ,
         resultClass = Authoring_Entities.class
 )
 @NamedNativeQuery(
         name= "displayAllAuthoringEntities",
         query = "SELECT * " +
-                "FROM Authoring_Entities " +
-                "WHERE email = ?",
+                "FROM Authoring_Entities " ,
         resultClass = Authoring_Entities.class
 )
 
@@ -85,8 +85,8 @@ public class Authoring_Entities {
      */
     @Override
     public String toString(){
-        return  this.email + "      "+
-                name + "      "+
-                this.name ;
+        return  this.email + "         "+
+                name + "      "
+                 ;
     }
 }

@@ -66,8 +66,6 @@ public class Booking {
             repeatMenu = false;
          }
          else if (userChoice == 5){
-            repeatMenu = false;
-            System.out.println("Quitting Program");
          }
       }while(repeatMenu);
    }
@@ -447,7 +445,7 @@ public void updateBooks(){
       System.out.println( "2. Add ad hoc team" );
       System.out.println( "3. List information about Writing Groups" );
 
-      System.out.println( "4. Add individual Author\n" );
+      System.out.println( "4. Add individual Author" );
 
       System.out.println( "5. Add writing group" );
 
@@ -464,7 +462,7 @@ public void updateBooks(){
             repeatMenu = false;
          }
          if (userChoice == 2){
-//            addAdHocTeam();
+         addAdHocTeam();
             repeatMenu = false;
          }
          if (userChoice == 3){
@@ -487,12 +485,34 @@ public void updateBooks(){
    }
 
    /**
+    * Method to add an Ad Hoc Team to the authoring entities table in the database.
+    */
+   public void addAdHocTeam(){
+
+   Scanner input= new Scanner(System.in);
+      System.out.print("Enter name of Ad Hoc Team: ");
+   String teamName = input.nextLine();
+      System.out.print("Enter the email of the Ad Hoc Team: ");
+   String teamEmail = input.nextLine();
+   List<Authoring_Entities> authEmail = this.em.createNamedQuery("displayAllAuthoringEntities", Authoring_Entities.class).setParameter(1, teamEmail).getResultList();
+      if(authEmail.size() != 0) {
+      System.out.println("Email already exists");
+   }
+               else{
+      List<Ad_Hoc_Teams> hoc = new ArrayList<>();
+      hoc.add(new Ad_Hoc_Teams(teamEmail, teamName, null));
+      this.createEntity(hoc);
+   }
+
+}
+
+   /**
     * Method display the authoring entities
     */
    public void displayAuthoringEntities(){
       List<Authoring_Entities> authoringEntities = em.createNamedQuery("displayAllAuthoringEntities", Authoring_Entities.class).getResultList();
       System.out.println("List of all Authoring Entities");
-      System.out.println("EMAIL    AUTHORING_TYPE     NAME     HEAD_WRITER    YEAR_FORMED");
+      System.out.println("EMAIL                     NAME     ");
 
       if(!authoringEntities.isEmpty()) {
          for (Authoring_Entities authoringEntity : authoringEntities) {
@@ -536,20 +556,26 @@ public void updateBooks(){
     */
    public void displayPrimaryKeys(){
       System.out.println("Books");
-      List<Books> booksList= em.createNamedQuery("bookIsbn",Books.class).getResultList();
-      for(Books book:booksList){
-         System.out.println(book.getIsbn());
-      }
+      List<Books> booksList= em.createNamedQuery("displayAllBooks",Books.class).getResultList();
+      if(!booksList.isEmpty()){
+         System.out.println("-----Books Primary Keys-----\n");
+         for(Books book:booksList){
+            System.out.println(book.getIsbn());
+         }}
       System.out.println("Publishers");
-      List<Publishers> publishersList =  em.createNamedQuery("publishers",Publishers.class).getResultList();
-      for(Publishers publishers:publishersList){
-         System.out.println(publishers.getName());
-      }
+      List<Publishers> publishersList =  em.createNamedQuery("displayAllPublishers",Publishers.class).getResultList();
+      if(!publishersList.isEmpty()){
+         System.out.println("-----Publishers Primary Keys-----\n");
+         for(Publishers publisher:publishersList){
+            System.out.println(publisher.getName());
+         }}
       System.out.println("Authoring Entities");
-      List<Authoring_Entities> authoringList= em.createNamedQuery("authoring", Authoring_Entities.class).getResultList();
+      List<Authoring_Entities> authoringList= em.createNamedQuery("displayAllAuthoringEntities", Authoring_Entities.class).getResultList();
+      if(!authoringList.isEmpty()){
+         System.out.println("-----Authoring Entities Primary Keys-----\n");
       for(Authoring_Entities auth:authoringList){
          System.out.println(auth.getEmail());
-      }
+      }}
 
    }
    /**
@@ -649,6 +675,11 @@ public void updateBooks(){
       List <Books> books = new ArrayList<>();
       List <Publishers> publishers = new ArrayList<>();
 
+      entities.add(new Authoring_Entities("AnnaWeiner@gmail.com", "Anna Weiner"));
+      entities.add(new Authoring_Entities("FlynnBerry@gmail.com","Flynn Berry"));
+      entities.add(new Authoring_Entities("SarahPearse@gmail.com", "Sarah Pearse"));
+      entities.add(new Authoring_Entities("PatriciaEngel@gmail.com",  "Patricia Engel"));
+      entities.add(new Authoring_Entities("PenelopeLively@gmail.com", "Penelope Lively"));
 
       publishers.add(new Publishers("Scholastic", "Scholastic@gmail.com", "8475647465" ));
       publishers.add(new Publishers("Simon & Schuster", "SimonSchuster@gmail.com", "1246479584"));
@@ -656,13 +687,9 @@ public void updateBooks(){
       publishers.add(new Publishers("Penguin Books", "PenguinBooks@gmail.com", "6745653389"));
       publishers.add(new Publishers("Chronicle Books", "ChronicleBooks@gmail.com", "9087653647"));
 
-      entities.add(new Authoring_Entities("AnnaWeiner@gmail.com", "Anna Weiner"));
-      entities.add(new Authoring_Entities("FlynnBerry@gmail.com","Flynn Berry"));
-      entities.add(new Authoring_Entities("SarahPearse@gmail.com", "Sarah Pearse"));
-      entities.add(new Authoring_Entities("PatriciaEngel@gmail.com",  "Patricia Engel"));
-      entities.add(new Authoring_Entities("PenelopeLively@gmail.com", "Penelope Lively"));
 
       booking.createEntity(publishers);
+
 
       books.add(new Books("9375638264859", "To Kill a Mocking Bird", 2002, publishers.get(0),  entities.get(0)));
       books.add(new Books("8263548392726", "The Disappearances ", 2009, publishers.get(1), entities.get(1)));
@@ -672,12 +699,9 @@ public void updateBooks(){
 
 
 
-
-
       booking.createEntity(entities);
       booking.createEntity(publishers);
       booking.createEntity(books);
-      tx.commit();
 
       boolean exitCondition = false;
 
