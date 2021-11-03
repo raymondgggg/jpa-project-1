@@ -510,11 +510,7 @@ public class Booking {
       booking.createEntity(books);
 
 
-
-      tx.commit();
-
-
-
+      
       booking.deleteBook();
       tx.commit();
 
