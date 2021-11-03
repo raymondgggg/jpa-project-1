@@ -8,12 +8,5 @@
       <jdbc-url>jdbc:derby:$PROJECT_DIR$/database/booking</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="booking [2]" uuid="c6949872-ccb0-4ba0-9945-e48cb729d9dd">
-      <driver-ref>derby.embedded</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>org.apache.derby.jdbc.EmbeddedDriver</jdbc-driver>
-      <jdbc-url>jdbc:derby:$PROJECT_DIR$/database/booking;create=true</jdbc-url>
-      <working-dir>$ProjectFileDir$</working-dir>
-    </data-source>
   </component>
 </project>
