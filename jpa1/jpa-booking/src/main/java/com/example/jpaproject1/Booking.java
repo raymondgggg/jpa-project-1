@@ -151,7 +151,6 @@ public class Booking {
    /**
     * Method to list the information about a specific book based on user's input of Title
     */
-    */
    public void listInfoBooks(){
       // Scanner to take user input on book title
       Scanner scanner = new Scanner(System.in);
