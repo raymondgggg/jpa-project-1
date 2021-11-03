@@ -1,6 +1,7 @@
 package com.example.jpaproject1;
 
 import model.*;
+import org.apache.derby.impl.store.raw.log.Scan;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -74,18 +75,11 @@ public class Booking {
       EntityManagerFactory emf = Persistence.createEntityManagerFactory("Main");
       EntityManager em  = emf.createEntityManager();
       Booking m = new Booking(em);
-      System.out.println( "\n-----Books Menu-----\nPlease select an option.\n" );
-      System.out.println( "1. Display all Books" );
-      System.out.println( "2. Add a Book" );
-      System.out.println( "3. Information about a BookList" );
-      System.out.println( "4. Delete a Book" );
-      System.out.println( "5. Update a Book" );
-      System.out.println( "6. Return to Main Menu\n" );
-      System.out.println( "7. Exit\n" );
-
-      //get user input
+      System.out.println( "\n-----Books Menu-----\nPlease select an option.\n\"1. Display all Books\n2. Add a Book\n" +
+              "3. Information about a BookList\n4. Delete a Book\n5. Update a Book\n6. Return to Main Menu\n" +
+              "7. Exit\n" );
       System.out.println("Option: ");
-      int userChoice = getIntRange(1, 7);
+      int userChoice = getIntRange(1, 7); //get user input
       boolean repeatMenu = true;
 
       do{
@@ -296,6 +290,12 @@ public class Booking {
     * Method to add a book object to the relational database
     */
    public void addBook(){
+      Scanner input=new Scanner(System.in);
+      System.out.println("What is book title");
+      String name=s
+      System.out.println("What is ISBM");
+
+
 
    }
 
@@ -341,6 +341,7 @@ public class Booking {
    }
 
    /**
+<<<<<<< Updated upstream
     * Method to display all the Authoring Entities in the relational database
     */
    public void displayAuthoringEntities(){
@@ -359,6 +360,10 @@ public class Booking {
    }
 
 
+=======
+    * Displays primary keys for books, publishers, and authoring
+    */
+>>>>>>> Stashed changes
    public void displayPrimaryKeys(){
       System.out.println("Books");
       List<Books> booksList= em.createNamedQuery("books",Books.class).getResultList();
