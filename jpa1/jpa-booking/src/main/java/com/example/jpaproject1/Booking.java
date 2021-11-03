@@ -141,8 +141,16 @@ public class Booking {
 
    }
 
+<<<<<<< Updated upstream
 
 
+=======
+   //public void deleteBook(){
+      //List <Books> books = new ArrayList<>();
+      //books = this.em.createNamedQuery("allBooks", Books.class).getResultList();
+      //int book=getIntRange(0, books.size());
+   //}
+>>>>>>> Stashed changes
 
 
    /**
@@ -185,12 +193,14 @@ public void updateBooks(){
    /**
     * Method to list the information about a specific book based on user's input of Title
     */
+
+
    public void listInfoBooks(){
       // Scanner to take user input on book title
       Scanner scanner = new Scanner(System.in);
 
       // display all Titles of books available to user
-      displayBookTitles();
+      //displayBookTitles();
 
       // prompt user to enter a book title
       System.out.println("Please enter the Title of the Book you want to view: ");
@@ -201,6 +211,7 @@ public void updateBooks(){
 
       // if a valid book title is entered, display information about that specific book
       if(!books.isEmpty()) {
+         System.out.println("ISBN    TITLE     YEAR PUBLISHED      AUTHORING ENTITY    PUBLISHER");
          for (Books book : books) {
             System.out.println(book);
          }
@@ -216,9 +227,14 @@ public void updateBooks(){
     */
    public void displayBookTitles(){
       System.out.println("Book Titles");
-      List<Books> booksList= em.createNamedQuery("bookTitles",Books.class).getResultList();
-      for(Books book:booksList){
-         System.out.println(book);
+      List<Books> books= em.createNamedQuery("bookTitles",Books.class).getResultList();
+
+      if(!books.isEmpty()){
+      for(Books book:books){
+         System.out.println(book.getTitle());
+      }}
+      else{
+         System.out.println("No record of books exist.");
       }
    }
 
@@ -287,17 +303,18 @@ public void updateBooks(){
       Scanner scanner = new Scanner(System.in);
 
       // display all the Names of publishers available to user
-      displayPublisherNames();
+      //displayPublisherNames();
 
       // prompt user to enter a publisher name
       System.out.println("Please enter the Name of the Publisher you want to view: ");
-      String desiredPublihser = scanner.nextLine();
+      String desiredPublisher = scanner.nextLine();
 
       // executes the query to get the result of the publisher with the chosen name
-      List<Publishers> publishers = em.createNamedQuery("findPublisher", Publishers.class).setParameter(1, desiredPublihser).getResultList();
+      List<Publishers> publishers = em.createNamedQuery("findPublisher", Publishers.class).setParameter(1, desiredPublisher).getResultList();
 
       // if a valid publisher name is entered, display information about that specific publisher
       if(!publishers.isEmpty()) {
+         System.out.println("NAME    EMAIL     PHONE");
          for (Publishers publisher : publishers) {
             System.out.println(publisher);
          }
@@ -573,6 +590,7 @@ public void updateBooks(){
       booking.createEntity(books);
 
 
+<<<<<<< Updated upstream
 
 
       booking.deleteBook();
@@ -581,7 +599,12 @@ public void updateBooks(){
 
       booking.addWritingGroup();
 
+=======
+      booking.listInfoPublisher();
+>>>>>>> Stashed changes
       tx.commit();
+
+
 
 
    }

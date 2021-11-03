@@ -186,8 +186,8 @@ public class Books {
         return   isbn + "  \t  " +
                  title + "  \t   " +
                  year_published + "  \t  " +
-                 this.getAuthoring_entity_name() + "  \t  " +
-                 this.getPublisher_name()  ;
+                 authoring_entity_name.getName() + "  \t  " +
+                 publisher_name.getName()  ;
 
     }
 

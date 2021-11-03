@@ -8,7 +8,7 @@ import java.util.Objects;
 
 @NamedNativeQuery(
         name="publishers",
-        query = "SELECT name"+
+        query = "SELECT name "+
                 "FROM   Publishers"
 )
 @NamedNativeQuery(
@@ -27,7 +27,7 @@ import java.util.Objects;
 @NamedNativeQuery(
         name="findPublisher",
         query = "SELECT * " +
-                "FROM   PUBLISHER " +
+                "FROM   PUBLISHERS " +
                 "WHERE  NAME  = ? ",
         resultClass = Publishers.class
 )
