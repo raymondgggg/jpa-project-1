@@ -124,6 +124,9 @@ public class Booking {
       while(repeatMenu);
    }
 
+   /**
+    * Method to delete book fropm database
+    */
    public void deleteBook(){
       System.out.println("what book do you want to delete");
       List <Books> books = this.em.createNamedQuery("booksList", Books.class).getResultList();
@@ -400,6 +403,9 @@ public class Booking {
       }
    }
 
+   /**
+    * show all primary keys"
+    */
    public void displayPrimaryKeys(){
       System.out.println("Books");
       List<Books> booksList= em.createNamedQuery("bookIsbn",Books.class).getResultList();
