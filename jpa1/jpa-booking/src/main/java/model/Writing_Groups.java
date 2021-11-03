@@ -10,7 +10,7 @@ import javax.persistence.Entity;
  */
 @Entity
 @DiscriminatorValue("Writing Groups")
-class Writing_Groups extends Authoring_Entities{
+public class Writing_Groups extends Authoring_Entities{
 
     /** Head writer of the group*/
     @Column(nullable = true, length = 80)

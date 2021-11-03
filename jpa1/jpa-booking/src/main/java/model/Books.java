@@ -20,7 +20,6 @@ import java.util.Objects;
         resultClass = Books.class
 )
 
-
 @NamedNativeQuery(
         name="bookIsbn",
         query = "SELECT * " +

@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import java.sql.SQLOutput;
 import java.util.*;
 import java.util.Scanner;
 import java.util.logging.Logger;
@@ -128,6 +129,7 @@ public class Booking {
     * Method to delete book fropm database
     */
    public void deleteBook(){
+<<<<<<< Updated upstream
       System.out.println("what book do you want to delete");
       List <Books> books = this.em.createNamedQuery("booksList", Books.class).getResultList();
       for(int i=0; i<books.size();i++){
@@ -137,7 +139,16 @@ public class Booking {
       this.em.remove(deleteBook);
       System.out.println("Book is removed");
 
+=======
+      List <Books> books = new ArrayList<>();
+//      books = this.em.createNamedQuery("allBooks", Books.class).getResultList();
+      int book=getIntRange(0, books.size());
+>>>>>>> Stashed changes
    }
+
+
+
+
 
    /**
     * Method to display all the books in the relational database
@@ -342,6 +353,34 @@ public class Booking {
    }
 
 
+   public void addWritingGroup(){
+      System.out.print("What is the name of the group: ");
+      String writingGroup = getString();
+
+      System.out.print("What is the name of the head writer? ");
+      String headWriter = getString();
+
+      System.out.print("Year the group was formed");
+      int year = getIntRange(0, 2021);
+
+      boolean exitConditon = false;
+
+      do {
+         System.out.print("Enter the email of the group: ");
+         String email = getString();
+         List<Authoring_Entities> aEmail = this.em.createNamedQuery("displayAllAuthoringEntities", Authoring_Entities.class).setParameter(1, email).getResultList();
+
+         if (aEmail.size() == 0){
+            List<Writing_Groups> wg = new ArrayList<Writing_Groups>();
+            Writing_Groups newWg = new Writing_Groups(email, writingGroup);
+            newWg.setHead_writer(headWriter);
+            newWg.setYear_formed(year);
+            wg.add(newWg);
+            this.createEntity(wg);
+            exitConditon = true;
+         }
+      }while(exitConditon == false);
+   }
 
 
 
@@ -451,6 +490,16 @@ public class Booking {
    } //End of the getIntRange method
 
    /**
+    * Takes in a string from the user.
+    * @return the inputted String.
+    */
+   public static String getString() {
+      Scanner in = new Scanner( System.in );
+      String input = in.nextLine();
+      return input;
+   }
+
+   /**
     * Create and persist a list of objects to the database.
     * @param entities   The list of entities to persist.  These can be any object that has been
     *                   properly annotated in JPA and marked as "persistable."  I specifically
@@ -515,9 +564,13 @@ public class Booking {
       booking.createEntity(publishers);
       booking.createEntity(books);
 
+<<<<<<< Updated upstream
 
 
       booking.deleteBook();
+=======
+      booking.addWritingGroup();
+>>>>>>> Stashed changes
       tx.commit();
 
 

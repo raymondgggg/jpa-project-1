@@ -17,7 +17,8 @@ import javax.persistence.*;
 @NamedNativeQuery(
         name= "displayAllAuthoringEntities",
         query = "SELECT * " +
-                "FROM   AUTHORING_ENTITIES",
+                "FROM Authoring_Entities " +
+                "WHERE email = ?",
         resultClass = Authoring_Entities.class
 )
 
