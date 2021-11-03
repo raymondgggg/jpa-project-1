@@ -77,7 +77,7 @@ public class Booking {
     * can have with the Book entity
     */
    public void booksMenu(){
-      EntityManagerFactory emf = Persistence.createEntityManagerFactory("Main");
+      EntityManagerFactory emf = Persistence.createEntityManagerFactory("Booking");
       EntityManager em  = emf.createEntityManager();
       Booking m = new Booking(em);
       System.out.println( "\n-----Books Menu-----\nPlease select an option.\n\"1. Display all Books\n2. Add a Book\n" +
@@ -89,7 +89,7 @@ public class Booking {
 
       do{
          if (userChoice == 1){
-            //displayBooks();
+            displayBooks();
             booksMenu();
             repeatMenu = false;
          }
@@ -99,6 +99,7 @@ public class Booking {
             repeatMenu = false;
          }
          if (userChoice == 3){
+            listInfoBooks();
             booksMenu();
             repeatMenu = false;
          }
@@ -264,14 +265,15 @@ public void updateBooks(){
 
       do{
          if (userChoice == 1){
+            displayPublishers();
             repeatMenu = false;
          }
          else if (userChoice == 2){
             addPublisher();
             repeatMenu = false;
-
          }
          else if (userChoice == 3){
+            listInfoPublisher();
             repeatMenu = false;
 
          }
@@ -650,8 +652,6 @@ public void updateBooks(){
       }
    } // End of createEntity member method
 
-
-
    public static void main(String[] args) {
 
       LOGGER.fine("Creating EntityManagerFactory and EntityManager");
@@ -693,13 +693,19 @@ public void updateBooks(){
       books.add(new Books("48572625474834", "Northern Spy", 2003, publishers.get(4), entities.get(4)));
 
 
-      booking.displayPublishers();
+
 
       booking.createEntity(entities);
       booking.createEntity(publishers);
       booking.createEntity(books);
+      booking.displayBooks();
+      boolean exitCondition = false;
 
-      booking.addAdHocTeam();
+      do{
+         booking.displayMainMenu();
+      }while(exitCondition == false);
+
+
 
       tx.commit();
 
