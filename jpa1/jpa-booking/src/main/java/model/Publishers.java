@@ -11,11 +11,6 @@ import java.util.Objects;
         query = "SELECT name "+
                 "FROM   Publishers"
 )
-@NamedNativeQuery(
-        name="publisherNames",
-        query = "SELECT name " +
-                "FROM   PUBLISHERS"
-)
 
 @NamedNativeQuery(
         name= "displayAllPublishers",
@@ -145,8 +140,8 @@ public class Publishers {
      */
     @Override
     public String toString() {
-        return  name + "             " +
-                email + "             " +
+        return  name + "         " +
+                email + "         " +
                 phone ;
     }
 

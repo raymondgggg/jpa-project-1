@@ -27,6 +27,15 @@ import javax.persistence.*;
         resultClass = Authoring_Entities.class
 )
 
+@NamedNativeQuery(
+        name="findAuthoringEntity",
+        query = "SELECT * " +
+                "FROM   authoring_entities " +
+                "WHERE  EMAIl = ? ",
+        resultClass = Authoring_Entities.class
+)
+
+
 public class Authoring_Entities {
 
     /** email of entity*/

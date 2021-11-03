@@ -140,14 +140,25 @@ public class Booking {
       System.out.println("Book is removed");
 
    }
-   
+
+
+
+
+   //public void deleteBook(){
+      //List <Books> books = new ArrayList<>();
+      //books = this.em.createNamedQuery("allBooks", Books.class).getResultList();
+      //int book=getIntRange(0, books.size());
+   //}
+
+
+
    /**
     * Method to display all the books in the relational database
     */
    public void displayBooks(){
       List<Books> books = em.createNamedQuery("displayAllBooks", Books.class).getResultList();
       System.out.println("List of all books");
-      System.out.println("ISBN    TITLE     YEAR PUBLISHED      AUTHORING ENTITY    PUBLISHER");
+      System.out.println("ISBN              TITLE                  YEAR PUBLISHED        AUTHORING ENTITY      PUBLISHER");
 
       if(!books.isEmpty()) {
          for (Books book : books) {
@@ -222,14 +233,9 @@ public void updateBooks(){
    /**
     * Method to list the information about a specific book based on user's input of Title
     */
-
-
    public void listInfoBooks(){
       // Scanner to take user input on book title
       Scanner scanner = new Scanner(System.in);
-
-      // display all Titles of books available to user
-      //displayBookTitles();
 
       // prompt user to enter a book title
       System.out.println("Please enter the Title of the Book you want to view: ");
@@ -240,7 +246,7 @@ public void updateBooks(){
 
       // if a valid book title is entered, display information about that specific book
       if(!books.isEmpty()) {
-         System.out.println("ISBN    TITLE     YEAR PUBLISHED      AUTHORING ENTITY    PUBLISHER");
+         System.out.println("ISBN              TITLE            YEAR PUBLISHED    AUTHORING ENTITY    PUBLISHER");
          for (Books book : books) {
             System.out.println(book);
          }
@@ -250,24 +256,6 @@ public void updateBooks(){
          System.out.println("You have entered an invalid Book Title.");
       }
    }
-
-   /**
-    * Method to display all the titles of the books in the relational database
-    */
-   public void displayBookTitles(){
-      System.out.println("Book Titles");
-      List<Books> books= em.createNamedQuery("bookTitles",Books.class).getResultList();
-
-      if(!books.isEmpty()){
-      for(Books book:books){
-         System.out.println(book.getTitle());
-      }}
-      else{
-         System.out.println("No record of books exist.");
-      }
-   }
-
-
 
    /**
     * Method that displays the interactions that the user
@@ -331,9 +319,6 @@ public void updateBooks(){
       // Scanner to take user input on publisher name
       Scanner scanner = new Scanner(System.in);
 
-      // display all the Names of publishers available to user
-      //displayPublisherNames();
-
       // prompt user to enter a publisher name
       System.out.println("Please enter the Name of the Publisher you want to view: ");
       String desiredPublisher = scanner.nextLine();
@@ -343,7 +328,7 @@ public void updateBooks(){
 
       // if a valid publisher name is entered, display information about that specific publisher
       if(!publishers.isEmpty()) {
-         System.out.println("NAME    EMAIL     PHONE");
+         System.out.println("NAME               EMAIL                     PHONE");
          for (Publishers publisher : publishers) {
             System.out.println(publisher);
          }
@@ -351,17 +336,6 @@ public void updateBooks(){
       // if user enters a publisher name which does not exist
       else{
          System.out.println("You have entered an invalid Publisher Name.");
-      }
-   }
-
-   /**
-    * Method to display all the names of the publishers in the relational database
-    */
-   public void displayPublisherNames(){
-      System.out.println("Publisher Names");
-      List<Publishers> publishersList = em.createNamedQuery("publisherNames",Publishers.class).getResultList();
-      for(Publishers publisher:publishersList){
-         System.out.println(publisher);
       }
    }
 
@@ -508,6 +482,33 @@ public void updateBooks(){
    }
 
    /**
+    * Method to list the information about a specific authority entity based on user's input of Email
+    */
+   public void listInfoAuthoringEntity(){
+      // Scanner to take user input on author's email
+      Scanner scanner = new Scanner(System.in);
+
+      // prompt user to enter an author email
+      System.out.println("Please enter the Email of the Author you want to view: ");
+      String desiredAuthor = scanner.nextLine();
+
+      // executes the query to get the result of the publisher with the chosen name
+      List<Authoring_Entities> authoringEntities = em.createNamedQuery("findAuthoringEntity", Authoring_Entities.class).setParameter(1, desiredAuthor).getResultList();
+
+      // if a valid author's email is entered, display information about that specific author
+      if(!authoringEntities.isEmpty()) {
+         System.out.println("EMAIL    AUTHORING_TYPE     NAME    ");
+         for (Authoring_Entities authorityEntity : authoringEntities) {
+            System.out.println(authorityEntity);
+         }
+      }
+      // if user enters a publisher name which does not exist
+      else{
+         System.out.println("You have entered an invalid Email.");
+      }
+   }
+
+   /**
     * show all primary keys"
     */
    public void displayPrimaryKeys(){
@@ -635,6 +636,12 @@ public void updateBooks(){
 
 
 
+<<<<<<< Updated upstream
+=======
+      tx.commit();
+
+
+>>>>>>> Stashed changes
 
 
    }
