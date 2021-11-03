@@ -169,7 +169,7 @@ public void updateBooks(){
    }
    Books updateBook=books.get(getIntRange(0, books.size()));
    System.out.println("Who is the new authoring entity");
-   List <Authoring_Entities> auth = this.em.createNamedQuery("allAuth", Authoring_Entities.class).getResultList();
+   List <Authoring_Entities> auth = this.em.createNamedQuery("displayAllAuthoringEntities", Authoring_Entities.class).getResultList();
    for (int i=0;i< auth.size();i++){
       System.out.println(i+" "+auth.get(i).getName());
    }
