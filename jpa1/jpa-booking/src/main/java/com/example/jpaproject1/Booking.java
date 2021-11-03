@@ -422,6 +422,9 @@ public void updateBooks(){
    }
 
 
+   public void addAdHocTeam(){
+      
+   }
 
    /**
     * Method that displays the interactions that the user
@@ -432,7 +435,7 @@ public void updateBooks(){
       System.out.println( "1. Display all Authoring Entities" );
       System.out.println( "2. Add Ad Hoc Team" ); // me
       System.out.println( "3. List information about Writing Groups" );
-      System.out.println( "4. Add individual Author\n" ); // me
+      System.out.println( "4. Add individual Author\n" );
       System.out.println( "5. Exit\n" );
 
       System.out.println("Option: ");
